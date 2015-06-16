@@ -1,0 +1,41 @@
+* { margin: 0; padding: 0;}
+html, body {
+	font-family: Tahoma, Geneva, sans-serif;
+}
+#wrapper {
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+}
+.row {
+	padding: 10px 0px;
+	width: 100%;	
+	max-width: 600px;
+	margin: 0 auto;
+}
+.center {
+	text-align: center;
+}
+
+#review {
+	width: 100%;
+	height: auto;
+}
+
+#logo {
+	width: 40%;
+	max-width: 320px;
+	min-width: 128px;
+	height: auto;
+	cursor: pointer;
+}
+
+.row h1 {
+	font-size: 1.6em;
+	color: #2B96FF;
+}
+.row h2 {
+	font-size: 0.9em;
+	color: #82C2FF;
+	font-style: italic;
+}

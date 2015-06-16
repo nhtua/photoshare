@@ -1,0 +1,51 @@
+* { margin: 0; padding: 0;}
+html, body {
+	font-family: Tahoma, Geneva, sans-serif;
+	padding-bottom: 30px;
+}
+#wrapper {
+	width: 100%;
+	height: auto;
+	margin-top: 20px;
+}
+.row {
+	padding: 10px 0px;
+	width: 100%;	
+	max-width: 600px;
+	margin: 0 auto;
+	clear: both;
+}
+.center {
+	text-align: center;
+}
+
+#showPhoto {
+	display: none;
+	width: 100%;
+	height: auto;
+}
+
+#logo {
+	width: 10%;
+	max-width: 48px;
+	min-width: 24px;
+	height: auto;
+}
+
+.row h1 {
+	font-size: 1.6em;
+	color: #2B96FF;
+}
+.row h2 {
+	font-size: 0.9em;
+	color: #82C2FF;
+	font-style: italic;
+}
+a#btnDownload {
+  display: inline-block;
+  padding: 0.6em 1.2em;
+  text-decoration: none;
+  background: #2B96FF;
+  color: #FFF;
+  display: none;
+}

@@ -3,23 +3,42 @@ var express = require("express");
 var app     = express();
 var server  = require("http").Server(app);
 var io      = require("socket.io").listen(server);
+var url     = require("url");
+var qr      = require('qr-image');
 
 
+app.set('views', __dirname + '/views');
+app.set('view engine', 'jade');
+app.set("view options", { layout: false });
 app.use(express.static(__dirname + '/public'));
 server.listen(3000);
 console.log("Server - Waiting connection at port: 3000");
 
+app.get("/qrcode", function(req, res){
+  var text = url.parse(req.url, true).query.text;
+  try {
+      var img = qr.image(text);
+      res.writeHead(200, {'Content-Type': 'image/png'});
+      img.pipe(res);
+  } catch (e) {
+      res.writeHead(414, {'Content-Type': 'text/html'});
+      res.end('<h1>414 Request-URI Too Large</h1>');
+  }
+});
 
-var roles = {
-  sender  : "",
-  receiver    : ""  
-};
+app.get("/", function(req, res){
+  res.render('home.jade');
+});
+app.get("/send", function(req, res){
+  var toID = url.parse(req.url, true).query.to;  
+  res.render('sender.jade', {sendToID: toID});
+});
+
 io.sockets.on('connection', function (socket) { 
-  socket.on('setRole', function (data) {
-    socket.role = data.trim();
-    roles[socket.role] = socket.id;
-    console.log("Role "+ socket.role + " is connected.");    
-  }); 
+  socket.emit("greeting", {
+    message: "Welcome to connect server.",
+    session: socket.id
+  });
 
   socket.on("sendPhoto", function(data){
     var guess = data.base64.match(/^data:image\/(png|jpeg);base64,/)[1];
@@ -33,16 +52,18 @@ io.sockets.on('connection', function (socket) {
     fs.writeFile(__dirname+"/public"+savedFilename, getBase64Image(data.base64), 'base64', function(err) {
       if (err !== null)
         console.log(err);
-      else 
-        io.to(roles.receiver).emit("receivePhoto", {
+      else {
+        console.log("Send to :"+data.sendToID);
+        io.to(data.sendToID).emit("receivePhoto", {
           path: savedFilename,
         });
-        console.log("Send photo success!");
+        console.log("Send photo success!");        
+      }
     });
   });
 
   socket.on('disconnect', function() {
-    console.log("Role " + socket.role + " is disconnect.");
+    console.log("Client #" + socket.id + " is disconnect.");
   }); 
 });
 

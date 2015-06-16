@@ -1,0 +1,19 @@
+doctype html
+html
+	head
+		title Home
+		link(rel="stylesheet" type="text/css" href="/css/home.css")
+		script(src="/socket.io/socket.io.js")
+		script(src="/js/receiver.script.js")
+	body
+		div#wrapper
+			div.row.center 				
+				h1
+					img#logo(src="/img/logo-512.png") 
+					span Show your QR code
+				h2 Photo sharing is so simple.
+			div.row.center
+				img#qrCode(src="" width=200)
+			div.row.center
+				img#showPhoto(src="")
+				a#btnDownload(href="" download) Download

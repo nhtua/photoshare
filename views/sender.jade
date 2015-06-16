@@ -1,0 +1,17 @@
+doctype html
+html
+	head
+		title Sender
+		link(rel="stylesheet" type="text/css" href="/css/sender.css")
+		script(src="/socket.io/socket.io.js")
+		script(src="/js/sender.script.js")
+	body
+		input#fileSelector(type="file" style="display:none;")
+		input#sendToID(type="hidden" value="#{sendToID}")
+		div#wrapper
+			div.row.center
+				img#logo(src="/img/logo-512.png")
+				h1 Press the air plane!
+				h2 Photo sharing is so simple.				
+			div.row.center
+				img#review
