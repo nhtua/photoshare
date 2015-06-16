@@ -7,7 +7,7 @@ Simple photo sharing real-time application with Nodejs, Expressjs
 3. Change server domain in the first line of `/public/js/receiver.script.js`
 4. Run `node server.js` to start application. If you want to run on port 80, use `sudo node server.js`.
 
-# Feature
+# Features
 ##1. Identify receiver device by QR code 
 - Access web app on device, which you want to send photo to.
 - Use your smart-phone to scan QR code and access to sender tool.
