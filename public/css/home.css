@@ -49,3 +49,22 @@ a#btnDownload {
   color: #FFF;
   display: none;
 }
+span#simpleCode {
+  color: #FD6767;
+  font-weight: bold;
+  padding-left: 10px;
+}
+#inputSimpleCode {
+  font-size: 1.2em;
+  line-height: 1.6em;
+  text-align:center;
+}
+#findFriend {
+  display:inline-block;
+  font-size: 1.2em;
+  background: #2B96FF;
+  padding: 0.3em 1em;
+  margin-left: -0.2em;
+  color: white;
+  cursor: pointer;
+}

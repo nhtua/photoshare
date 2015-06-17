@@ -9,11 +9,18 @@ html
 		div#wrapper
 			div.row.center 				
 				h1
-					img#logo(src="/img/logo-512.png") 
+					img#logo(src="/img/logo-64.png") 
 					span Show your QR code
 				h2 Photo sharing is so simple.
 			div.row.center
 				img#qrCode(src="" width=200)
+				p Or tell your friend code:
+					span#simpleCode
+			div.row.center
+				p Find your friend?
+				input#inputSimpleCode(placeholder="Input simple code")
+				div#findFriend find
 			div.row.center
 				img#showPhoto(src="")
 				a#btnDownload(href="" download) Download
+

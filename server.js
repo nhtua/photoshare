@@ -6,7 +6,6 @@ var io      = require("socket.io").listen(server);
 var url     = require("url");
 var qr      = require('qr-image');
 
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.set("view options", { layout: false });
@@ -34,10 +33,14 @@ app.get("/send", function(req, res){
   res.render('sender.jade', {sendToID: toID});
 });
 
+var bindingCodes = {};
 io.sockets.on('connection', function (socket) { 
+  var simpleCode = getSimpleCode();
+  bindingCodes["c"+simpleCode] = socket.id,
   socket.emit("greeting", {
     message: "Welcome to connect server.",
-    session: socket.id
+    session: socket.id, 
+    simpleCode: simpleCode
   });
 
   socket.on("sendPhoto", function(data){
@@ -53,8 +56,9 @@ io.sockets.on('connection', function (socket) {
       if (err !== null)
         console.log(err);
       else {
+        var sendToID = bindingCodes["c"+data.sendToID];
         console.log("Send to :"+data.sendToID);
-        io.to(data.sendToID).emit("receivePhoto", {
+        io.to(sendToID).emit("receivePhoto", {
           path: savedFilename,
         });
         console.log("Send photo success!");        
@@ -63,6 +67,10 @@ io.sockets.on('connection', function (socket) {
   });
 
   socket.on('disconnect', function() {
+    for(var code in bindingCodes) {
+      if (bindingCodes[code] == socket.id) 
+        delete bindingCodes[code];
+    }
     console.log("Client #" + socket.id + " is disconnect.");
   }); 
 });
@@ -79,4 +87,13 @@ function randomString(length)
 }
 function getBase64Image(imgData) {
     return imgData.replace(/^data:image\/(png|jpeg|jpg);base64,/, "");
+}
+function randomInt(min,max){
+    return Math.floor(Math.random()*(max-min+1)+min);
+}
+function getSimpleCode(){
+  var code = randomInt(10000, 99999);
+  if (typeof bindingCodes["c"+code] != "undefined")
+    return getSimpleCode();
+  return code;
 }
