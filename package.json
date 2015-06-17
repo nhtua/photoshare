@@ -1,7 +1,7 @@
 {
-  "name": "photo-share-demo",
-  "version": "0.0.2",
-  "description": "Photo sharing real-time (demo)",
+  "name": "photo-share",
+  "version": "0.0.3",
+  "description": "Photo sharing real-time",
   "repository": {
     "type": "git",
     "url": "git://github.com/nhtua/photoshare.git"
