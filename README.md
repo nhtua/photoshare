@@ -1,4 +1,4 @@
-#Photoshare v0.0.2
+#Photoshare v0.0.3
 Simple photo sharing real-time application with Nodejs, Expressjs
 
 #Config
